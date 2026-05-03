@@ -53,6 +53,20 @@ Link/
 ### 마이페이지
 - 내 여행 목록, 프로필 관리
 
+## 진행 현황
+
+### 완료
+- 프로젝트 폴더 구조 생성 (`backend/`, `frontend/`)
+- `backend/`: Spring Boot 초기 프로젝트 생성 (Maven, Java 21, Spring Web / Spring Data JPA / MySQL Driver / Lombok / DevTools / Validation)
+- `frontend/`: Vite + React + TypeScript 초기 프로젝트 생성
+- 루트 / backend / frontend `.gitignore` 설정 완료
+- GitHub push 완료
+
+### 다음 작업
+- DB 설계 및 Entity 작성
+- Spring Security + Google OAuth2 로그인 구현
+- React 라우팅 구조 설계
+
 ## Claude와 협업 방식 — 중요
 
 **이 프로젝트는 사용자가 직접 코드를 작성하는 학습/연습 프로젝트입니다.**
