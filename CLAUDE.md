@@ -61,10 +61,18 @@ Link/
 - `frontend/`: Vite + React + TypeScript 초기 프로젝트 생성
 - 루트 / backend / frontend `.gitignore` 설정 완료
 - GitHub push 완료
+- Domain Entity 작성 완료 (User, Trip, TripMember, TripItem, Vote, ChatMessage)
+- BaseEntity (createdAt, updatedAt) 작성 및 JPA Auditing 활성화
+- Spring Security + Google OAuth2 로그인 구현 완료
+  - SecurityConfig, JwtTokenProvider, JwtAuthFilter
+  - CustomOAuth2UserService, OAuth2SuccessHandler
+- application.yml / application-local.yml 설정 완료 (Google OAuth2, JWT Secret)
+- pom.xml 의존성 추가 (Spring Security, OAuth2 Client, jjwt)
 
 ### 다음 작업
-- DB 설계 및 Entity 작성
-- Spring Security + Google OAuth2 로그인 구현
+- Docker로 MySQL DB 띄우기
+- application-local.yml에 DB 연결 설정 추가
+- 서버 정상 기동 확인
 - React 라우팅 구조 설계
 
 ## Claude와 협업 방식 — 중요
