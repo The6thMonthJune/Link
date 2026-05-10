@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: linkapp-mysql  # 아까 설정한 컨테이너 이름
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: linkdb
+    ports:
+      - "3306:3306"  # 내컴퓨터:컨테이너
+    volumes:
+      - mysql-data:/var/lib/mysql  # DB 데이터 영구 저장 (컨테이너 꺼져도 데이터 유지)
+
+volumes:
+  mysql-data:
