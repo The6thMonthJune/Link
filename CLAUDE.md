@@ -12,8 +12,8 @@
 
 | 영역 | 기술 |
 |------|------|
-| Backend | Java, Spring Boot |
-| Frontend | React, TypeScript |
+| Backend | Java 21, Spring Boot 4, Spring Security, OAuth2, JWT (jjwt 0.12.6), JPA, MySQL 8 |
+| Frontend | React 19, TypeScript 6, Vite 8, React Router v7, Axios, Zustand |
 | Deployment | AWS |
 
 ## 디렉토리 구조
@@ -22,6 +22,14 @@
 Link/
 ├── backend/    # Spring Boot 프로젝트
 └── frontend/   # React + TypeScript 프로젝트
+    └── src/
+        ├── pages/          # UI 레이어 — 화면 컴포넌트 (RN 마이그레이션 시 재작성 대상)
+        │   └── trip/
+        ├── hooks/          # 로직 레이어 — 비즈니스 로직 커스텀 훅 (RN에서 재사용 가능)
+        ├── api/            # API 호출 레이어 — axios 기반 (RN에서 재사용 가능)
+        ├── store/          # 전역 상태 — Zustand (RN에서 재사용 가능)
+        ├── types/          # TypeScript 타입/인터페이스 (RN에서 재사용 가능)
+        └── router/         # 라우터 설정 — React Router v7 (RN 시 React Navigation으로 교체)
 ```
 
 ## 주요 기능 (피그마 기준)
@@ -70,10 +78,42 @@ Link/
 - pom.xml 의존성 추가 (Spring Security, OAuth2 Client, jjwt)
 
 ### 다음 작업
-- Docker로 MySQL DB 띄우기
-- application-local.yml에 DB 연결 설정 추가
-- 서버 정상 기동 확인
-- React 라우팅 구조 설계
+- React Router v7 라우팅 구조 설정
+- 페이지 컴포넌트 (pages/) 작성
+- Axios API 레이어 구성
+- Zustand 전역 상태 설정
+
+## 프론트엔드 아키텍처 원칙 — React Native 마이그레이션 대비
+
+이 프로젝트는 웹(React)으로 개발하되, 향후 앱(React Native) 마이그레이션을 염두에 두고 설계한다.
+
+### 레이어 분리 원칙
+
+| 레이어 | 위치 | RN 재사용 | 규칙 |
+|--------|------|-----------|------|
+| UI | `pages/`, `components/` | ❌ 재작성 | JSX/CSS 포함, 로직 최소화 |
+| 로직 | `hooks/` | ✅ 재사용 | DOM/브라우저 API 의존 금지 |
+| API | `api/` | ✅ 재사용 | axios 기반, 순수 함수 |
+| 상태 | `store/` | ✅ 재사용 | Zustand만 사용 |
+| 타입 | `types/` | ✅ 재사용 | 인터페이스/타입만 정의 |
+
+### 핵심 규칙
+- 비즈니스 로직은 반드시 `hooks/`의 커스텀 훅으로 분리 — 페이지 컴포넌트에 직접 작성 금지
+- API 호출은 `api/` 레이어에서만 — 컴포넌트나 훅에서 axios 직접 호출 금지
+- 전역 상태는 Zustand만 사용 — Context API, Redux 사용 금지
+- `hooks/`, `api/`, `store/`, `types/`는 DOM/window/document 등 브라우저 전용 API 사용 금지
+
+### 라우트 구조
+| 경로 | 페이지 | 인증 필요 |
+|------|--------|-----------|
+| `/` | SplashPage | ❌ |
+| `/login` | LoginPage | ❌ |
+| `/home` | HomePage | ✅ |
+| `/trips/new` | TripNewPage | ✅ |
+| `/trips/:tripId` | TripDetailPage | ✅ |
+| `/trips/:tripId/vote` | TripVotePage | ✅ |
+| `/trips/:tripId/chat` | TripChatPage | ✅ |
+| `/mypage` | MyPage | ✅ |
 
 ## Claude와 협업 방식 — 중요
 
