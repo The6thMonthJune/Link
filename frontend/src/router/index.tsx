@@ -3,6 +3,7 @@ import HomePage from "../pages/HomePage";
 import SplashPage from "../pages/SplashPage";
 import LogInPage from "../pages/LogInPage";
 import TripItemPage from "../pages/trip/TripItemPage";
+import EnterFriendsSpacePage from "../pages/EnterFriendsSpacePage";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     {
         path: "/trips/:tripId/items/:category",
         element: <TripItemPage />
+    },
+    {
+        path: "/enterspace",
+        element: <EnterFriendsSpacePage/>
     }
 ]);
 
