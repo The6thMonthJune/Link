@@ -5,8 +5,10 @@
 @theme {
     --color-primary: #4275FF;
     --color-secondary:  #5E8BFF;
+    --color-background: #F1F1F6;
     --color-text: #000000;
     --color-text-on-primary: #FFFFFF;
+    --color-icon-primary: #AFB8C1;
 
     --font-sans: 'Pretendard', sans-serif;
     --font-plex: 'IBM Plex Sans', sans-serif;

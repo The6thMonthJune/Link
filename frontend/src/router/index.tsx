@@ -4,28 +4,35 @@ import SplashPage from "../pages/SplashPage";
 import LogInPage from "../pages/LogInPage";
 import TripItemPage from "../pages/trip/TripItemPage";
 import EnterFriendsSpacePage from "../pages/EnterFriendsSpacePage";
+import Layout from "../components/common/Layout";
 
 const router = createBrowserRouter([
     {
-        path: "/",
-        element: <SplashPage />
-    },
-    {
-        path: "/home",
-        element: <HomePage />
+        element: <Layout />,
+        children: [
+            {
+                path: "/home",
+                element: <HomePage />
+            },
+            {
+                path: "/trips/:tripId/items/:category",
+                element: <TripItemPage />
+            },
+            {
+                path: "/enterspace",
+                element: <EnterFriendsSpacePage />
+            }
+        ]
     },
     {
         path: "/login",
         element: <LogInPage />
     },
     {
-        path: "/trips/:tripId/items/:category",
-        element: <TripItemPage />
+        path: "/",
+        element: <SplashPage />
     },
-    {
-        path: "/enterspace",
-        element: <EnterFriendsSpacePage/>
-    }
+
 ]);
 
 export default router;
