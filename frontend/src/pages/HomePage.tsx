@@ -3,6 +3,7 @@ import SeeMoreBtn from '../components/home/SeeMoreBtn';
 import { useNavigate } from 'react-router-dom';
 import HamburgerMenuBtn from '../components/home/HamburgerMenuBtn';
 import BottomNav from '../components/nav/BottomNav';
+import Calendar from '../components/home/Calendar';
 
 function HomePage() {
     return (
@@ -15,7 +16,7 @@ function HomePage() {
             </div>
             <div> <SeeMoreBtn /> </div>
         </div>
-        <div>캘린더</div>
+        <div><Calendar onclickDate={(date) => console.log(date)} /></div>
         <div></div>
     </div>
     );
