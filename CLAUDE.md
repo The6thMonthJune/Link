@@ -76,12 +76,44 @@ Link/
   - CustomOAuth2UserService, OAuth2SuccessHandler
 - application.yml / application-local.yml 설정 완료 (Google OAuth2, JWT Secret)
 - pom.xml 의존성 추가 (Spring Security, OAuth2 Client, jjwt)
+- React Router v7 라우팅 구조 설정 (createBrowserRouter, Layout/Outlet 패턴)
+- Zustand 인증 상태 관리 (`useAuthStore`) 구현
+- Axios 인스턴스 + 인터셉터 구성 (`api/client.ts`)
+- Tailwind CSS v4 + 디자인 토큰 설정 (`@theme` in index.css)
+- SplashPage, LoginPage (Google OAuth redirect, fade-in 애니메이션) 구현
+- AppLayout (max-w-[393px] 모바일 컨테이너) 구현
+- HomePage 구현
+  - HamburgerMenuBtn, SeeMoreBtn 헤더
+  - Calendar 컴포넌트 (주간/월간 스와이프 토글, 애니메이션)
+  - EmptyTripView 컴포넌트 (캘린더 상태 연동 마진)
+- BottomNav 컴포넌트 구현 (lucide-react, Union.png 배경, 가운데 Plus FAB)
 
 ### 다음 작업
-- React Router v7 라우팅 구조 설정
-- 페이지 컴포넌트 (pages/) 작성
-- Axios API 레이어 구성
-- Zustand 전역 상태 설정
+- SplashPage 토큰 확인 → 자동 라우팅 로직
+- OAuth 콜백 페이지 (백엔드에서 JWT 수신)
+- 여행 생성 모달 (TripNewModal)
+- TripDetailPage, TripVotePage, TripChatPage, MyPage
+- 백엔드 REST API 컨트롤러/서비스 레이어
+- AWS 배포
+
+## 포트폴리오 메모 — 기술적 하이라이트
+
+Claude와 작업하면서 구현한 기술적으로 흥미로운 부분들. 포트폴리오 작성 시 강조할 것.
+
+### 프론트엔드
+- **스와이프 제스처 (Calendar)**: `useState` 대신 `useRef`로 startY 저장 → 클로저 stale 문제 해결. `window` 레벨 mouseup/touchend 리스너로 스와이프 감지 영역 확장
+- **상태 끌어올리기 (State Lifting)**: Calendar의 `isExpanded`를 HomePage로 끌어올려 EmptyTripView의 마진을 동적으로 제어 (136px ↔ 96px)
+- **CSS max-height 애니메이션**: `height: auto`는 애니메이션 불가 → `max-h-[200px]` ↔ `max-h-[600px]` 트랜지션으로 부드러운 캘린더 확장/축소
+- **CSS Grid 이미지 겹치기**: `absolute` 없이 `col-start-1 row-start-1`로 두 이미지 오버랩 (EmptyTripView)
+- **Fixed 요소 중앙 정렬**: `fixed bottom-0 left-1/2 -translate-x-1/2`로 max-width 컨테이너 기준 BottomNav 정렬
+- **BottomNav FAB 패턴**: 커스텀 Union.png 배경(상단 라운딩 + 중앙 아치) + `absolute -translate-y-1/2`로 Plus 버튼 돌출 구현
+- **Tailwind v4 디자인 토큰**: `@theme`으로 시맨틱 컬러 변수 정의 → 다크모드 확장 가능한 구조
+- **React Native 마이그레이션 대비 레이어 분리**: UI(pages/components) / 로직(hooks) / API / 상태(Zustand) / 타입 레이어 분리
+
+### 백엔드
+- **Spring Security + Google OAuth2 + JWT**: 소셜 로그인 후 JWT 발급, 이후 모든 요청 토큰 검증
+- **JPA Auditing**: `@MappedSuperclass` BaseEntity로 createdAt/updatedAt 자동 관리
+- **jakarta.* 네임스페이스**: Spring Boot 3+ 기준 javax.* → jakarta.* 마이그레이션 적용
 
 ## 프론트엔드 아키텍처 원칙 — React Native 마이그레이션 대비
 

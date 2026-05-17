@@ -26,7 +26,7 @@ function LogInPage() {
             <img src={logoText} alt="Logo Text" />
         </div>
         <div className={`absolute bottom-10 left-0 right-0 px-6 flex justify-center transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            <button onClick={handleGoogleLogin} className='w-[353px] bg-white text-text font-regular py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors duration-300'>
+            <button onClick={handleGoogleLogin} className='w-[353px] bg-white text-text font-normal py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors duration-300'>
                 <img src={Google} alt="Google" className='max-w-[36px] max-h-[37px] inline-block mr-2' />
                 Google로 계속하기
             </button>
