@@ -107,6 +107,13 @@ Claude와 작업하면서 구현한 기술적으로 흥미로운 부분들. 포�
 - **CSS Grid 이미지 겹치기**: `absolute` 없이 `col-start-1 row-start-1`로 두 이미지 오버랩 (EmptyTripView)
 - **Fixed 요소 중앙 정렬**: `fixed bottom-0 left-1/2 -translate-x-1/2`로 max-width 컨테이너 기준 BottomNav 정렬
 - **BottomNav FAB 패턴**: 커스텀 Union.png 배경(상단 라운딩 + 중앙 아치) + `absolute -translate-y-1/2`로 Plus 버튼 돌출 구현
+- **BottomNav 아이콘 active/inactive 전환**: Figma에서 export한 이미지 쌍 (Home.png / Home_Active.png 등) → `isActive(path)` 조건으로 src 전환
+- **z-index 스태킹 버그 수정**: `absolute inset-0` 탭 컨테이너가 Plus 버튼 클릭을 막는 문제 → `z-10`으로 해결. fixed 요소 레이어링 이해
+- **말풍선 컴포넌트**: `rounded-xl rounded-bl-none` 패턴으로 특정 모서리만 sharp 처리. `showBubble` prop으로 조건부 렌더링
+- **탭 알림 배지**: 아이콘 우측 상단에 `absolute -top-1 -right-2`로 뱃지 오버레이. active 상태 + count 조건부 표시
+- **다단계 바텀시트 모달 (TripCreateModal)**: step 상태로 단계 관리, 중첩 모달 open/close 상태 분리
+- **중첩 바텀시트 z-index**: 메인 모달(z-40/z-50) 위에 중첩 모달(z-[60]/z-[70]) 스태킹
+- **날짜 범위 선택 캘린더 (TripDatePickerModal)**: 시작/종료일 상태 관리, `bg-primary/20`으로 범위 하이라이트, `rounded-none`으로 범위 연결 시각화. 월 이동(prev/next) 구현
 - **Tailwind v4 디자인 토큰**: `@theme`으로 시맨틱 컬러 변수 정의 → 다크모드 확장 가능한 구조
 - **React Native 마이그레이션 대비 레이어 분리**: UI(pages/components) / 로직(hooks) / API / 상태(Zustand) / 타입 레이어 분리
 
