@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import TripDatePickerModal from './TripDatePickerModal';
 
 interface TripCreateModalProps {
     isOpen: boolean;
@@ -20,14 +21,14 @@ function TripCreateModal({ isOpen, onClose }: TripCreateModalProps) {
         endDate: null,
         members: [],
     });
-    const [isDatePickerOpen, setIsDatePicerOpen] = useState(false);
+    const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
     const [isMemberModalOpen, setIsMemberModalOpen] = useState(false);
 
     const nextStep = () => setStep((s) => s + 1);
 
     if (!isOpen) return null;
 
-    return(
+    return (
         <>
             {/* 모달 오버레이 */}
             <div className='fixed inset-0 bg-black/50 z-40' onClick={onClose} />
@@ -45,22 +46,22 @@ function TripCreateModal({ isOpen, onClose }: TripCreateModalProps) {
                 {step === 2 && (
                     <div>
                         {/* TODO 여행 이름 선택 */}
-                        <input value = {tripData.name} onChange={(e) => setTripData((prev) => ({...prev, name: e.target.value}))} />
-                        <button onClick = {nextStep}> 다음 </button>
+                        <input value={tripData.name} onChange={(e) => setTripData((prev) => ({ ...prev, name: e.target.value }))} />
+                        <button onClick={nextStep}> 다음 </button>
                     </div>
                 )}
-                
+
                 {step === 3 && (
                     <div>
                         {/* TODO: 날짜 선택 화면 */}
-                        <button onClick = {() => setIsDatePicerOpen(true)}>날짜 선택</button>
+                        <button onClick = {() => setIsDatePickerOpen(true)}>날짜 선택</button>
                     </div>
                 )}
 
                 {step === 4 && (
                     <div>
                         {/* TODO: 맴버 추가 버튼 */}
-                        <button onClick = {() => setIsMemberModalOpen(true)}>맴버 추가</button>
+                        <button onClick={() => setIsMemberModalOpen(true)}>맴버 추가</button>
                     </div>
                 )}
 
@@ -82,6 +83,18 @@ function TripCreateModal({ isOpen, onClose }: TripCreateModalProps) {
                     <div> {/* TripMemberModal - 나중에 import */} </div>
                 )}
             </div>
+
+            {isDatePickerOpen && (
+                <TripDatePickerModal
+                    isOpen={isDatePickerOpen}
+                    onClose={() => setIsDatePickerOpen(false)}
+                    onConfirm={(start, end) => {
+                        setTripData((prev) => ({ ...prev, startDate: start, endDate: end }));
+                        setIsDatePickerOpen(false);
+                        nextStep();
+                    }}
+                />
+            )}
         </>
     )
 }
