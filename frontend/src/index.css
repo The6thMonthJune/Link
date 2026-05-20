@@ -16,3 +16,13 @@
     --font-sans: 'Pretendard', sans-serif;
     --font-plex: 'IBM Plex Sans', sans-serif;
 }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1;}
+}
+
+@keyframes starFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px);}
+}
