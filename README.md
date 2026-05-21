@@ -115,20 +115,30 @@ npm run dev
 ## 진행 현황
 
 ### ✅ 완료
+
+**Backend**
 - 전체 도메인 Entity 설계 및 구현 (User, Trip, TripMember, TripItem, Vote, ChatMessage)
-- Google OAuth2 + JWT 인증 구현
-- Spring Security 설정
+- Google OAuth2 + JWT 인증 구현 (Spring Security, OAuth2SuccessHandler, JwtAuthFilter)
 - Docker MySQL 환경 구성
-- React Router v7 라우팅 구조 설정
-- Zustand 인증 상태 관리
-- Axios HTTP 클라이언트 (JWT interceptor 포함)
+
+**Frontend**
+- React Router v7 라우팅 구조 설정 (createBrowserRouter, Layout/Outlet 패턴)
+- Zustand 인증 상태 관리, Axios HTTP 클라이언트 (JWT interceptor)
+- Tailwind CSS v4 디자인 토큰 설정 (`@theme` 시맨틱 컬러 변수)
+- SplashPage, LoginPage (Google OAuth redirect, fade-in 애니메이션)
+- HomePage — Calendar (주간/월간 스와이프 토글), EmptyTripView
+- BottomNav — Union.png 커스텀 배경, Plus FAB, 말풍선, 탭 알림 배지
+- TripCreateModal — 5단계 바텀시트 (대기 → 이름 → 날짜 → 멤버 → 확인), 별 float 애니메이션
+- TripDatePickerModal — 날짜 범위 선택 캘린더, 범위 연결 배경 밴드 시각화
 
 ### 🔄 진행 중
-- Google 로그인 프론트엔드 연동
-- 페이지 UI 구현
+- TripMemberModal (멤버 추가 바텀시트)
+- SplashPage 토큰 확인 → 자동 라우팅
 
 ### 📋 예정
-- 여행 생성 / 초대 API
+- OAuth 콜백 페이지 (백엔드에서 JWT 수신)
+- TripDetailPage, TripVotePage, TripChatPage, MyPage
+- 여행 생성 / 초대 REST API (컨트롤러 / 서비스 레이어)
 - 투표 API
 - WebSocket 실시간 채팅
 - AWS 배포 (EC2, RDS, S3)

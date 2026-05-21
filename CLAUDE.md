@@ -86,12 +86,21 @@ Link/
   - HamburgerMenuBtn, SeeMoreBtn 헤더
   - Calendar 컴포넌트 (주간/월간 스와이프 토글, 애니메이션)
   - EmptyTripView 컴포넌트 (캘린더 상태 연동 마진)
-- BottomNav 컴포넌트 구현 (lucide-react, Union.png 배경, 가운데 Plus FAB)
+- BottomNav 컴포넌트 구현 (Union.png 배경, Plus FAB, 말풍선, 탭 알림 배지)
+- TripCreateModal 구현 (5단계 바텀시트: 대기 → 이름 → 날짜 → 멤버 → 확인)
+  - StepLayout 공통 컴포넌트 (별/제목 위치 통일)
+  - 별 float 애니메이션 (`@keyframes starFloat`, `animationDelay` 엇박자)
+  - step 1 → 2 자동 전환 (`useEffect + setTimeout + clearTimeout`)
+  - 하단 progress bar (step 2~5)
+- TripDatePickerModal 구현 (날짜 범위 선택 캘린더)
+  - 이전/현재/다음 달 날짜로 7열 그리드 채우기 (`getMonthDates`)
+  - 시작일/종료일 배경 밴드 시각화 (`top-1/2 -translate-y-1/2 h-[30px]`)
+  - 시작일 오른쪽 절반 / 종료일 왼쪽 절반 / 범위 전체 채우기로 연결된 띠 구현
 
 ### 다음 작업
+- TripMemberModal (멤버 추가 바텀시트)
 - SplashPage 토큰 확인 → 자동 라우팅 로직
 - OAuth 콜백 페이지 (백엔드에서 JWT 수신)
-- 여행 생성 모달 (TripNewModal)
 - TripDetailPage, TripVotePage, TripChatPage, MyPage
 - 백엔드 REST API 컨트롤러/서비스 레이어
 - AWS 배포
@@ -113,7 +122,7 @@ Claude와 작업하면서 구현한 기술적으로 흥미로운 부분들. 포�
 - **탭 알림 배지**: 아이콘 우측 상단에 `absolute -top-1 -right-2`로 뱃지 오버레이. active 상태 + count 조건부 표시
 - **다단계 바텀시트 모달 (TripCreateModal)**: step 상태로 단계 관리, 중첩 모달 open/close 상태 분리
 - **중첩 바텀시트 z-index**: 메인 모달(z-40/z-50) 위에 중첩 모달(z-[60]/z-[70]) 스태킹
-- **날짜 범위 선택 캘린더 (TripDatePickerModal)**: 시작/종료일 상태 관리, `bg-primary/20`으로 범위 하이라이트, `rounded-none`으로 범위 연결 시각화. 월 이동(prev/next) 구현
+- **날짜 범위 선택 캘린더 (TripDatePickerModal)**: 시작/종료일 상태 관리. 2-레이어 구조로 범위 시각화 — `absolute top-1/2 -translate-y-1/2 h-[30px]` 배경 밴드(시작일 오른쪽 절반 / 종료일 왼쪽 절반 / 범위 전체) + `relative z-10` 원형 버튼. `inset-y-0` 대신 `top-1/2 -translate-y-1/2`로 세로 중앙 정렬. `toDateString()` 비교로 시간 제외 날짜만 비교
 - **Tailwind v4 디자인 토큰**: `@theme`으로 시맨틱 컬러 변수 정의 → 다크모드 확장 가능한 구조
 - **React Native 마이그레이션 대비 레이어 분리**: UI(pages/components) / 로직(hooks) / API / 상태(Zustand) / 타입 레이어 분리
 
